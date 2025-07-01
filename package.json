@@ -1,28 +1,32 @@
 {
-  "name": "playtech_transmitter",
+  "name": "jp_desktop_server_main",
   "version": "1.0.4",
-  "description": "Playtech Transmitter",
+  "description": "jp_desktop_server_main",
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js"
+    "start": "nodemon server.js"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/DaMorpheuS/playtech_transmitter.git"
+    "url": "t"
   },
-  "author": "Ruben Kaper",
+  "author": "HUU DAN JR",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/DaMorpheuS/playtech_transmitter/issues"
+    "url": ""
   },
-  "homepage": "https://github.com/DaMorpheuS/playtech_transmitter#readme",
+  "homepage": "",
   "dependencies": {
     "express": "^4.21.2",
+    "express-rate-limit": "^7.5.1",
     "http": "^0.0.1-security",
+    "moment": "^2.30.1",
+    "moment-timezone": "^0.6.0",
     "mongoose": "^8.16.1",
     "mongoose-sequence": "^6.0.1",
     "nconf": "^0.12.1",
+    "node-cron": "^4.2.0",
     "node-schedule": "^2.1.1",
     "path": "^0.12.7",
     "pm2": "^6.0.8",
@@ -30,5 +34,8 @@
     "ws": "^8.18.3",
     "wscat": "^6.1.0",
     "xml2js": "^0.6.2"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.10"
   }
 }

@@ -1,6 +1,7 @@
 
 const mongoose = require('mongoose');
 const { AutoIncrement } = require('../mongo_config');
+const moment = require('moment-timezone');
 
 const JackpotSchema = new mongoose.Schema({
   jackpotId: { type: String, required: true },
@@ -11,7 +12,12 @@ const JackpotSchema = new mongoose.Schema({
 const InformationBroadcastSchema = new mongoose.Schema({
   logId: { type: Number, unique: true }, // Auto-incremented ID
   jackpots: [JackpotSchema], // Array of jackpot updates
-  timestamp: { type: Date, default: Date.now },
+  timestamp: {
+        default: () => moment().tz("Asia/Bangkok").toLocaleString('en-US', {
+            timeZone: 'Asia/Bangkok'
+        }),
+        required:true,type:Date,
+    },
 }, { timestamps: true });
 
 // Add index for efficient querying
