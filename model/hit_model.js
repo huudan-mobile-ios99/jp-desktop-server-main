@@ -1,25 +1,23 @@
-// models/Hit.js
 const mongoose = require('mongoose');
-const { AutoIncrement } = require('../mongo_config');
-const moment = require('moment-timezone');
+const { AutoIncrement } = require('../Mongodb_Service/mongo_config_Hit');
+const db = mongoose.connection.useDb('JPDesktop_Hit');
+
 
 const HitSchema = new mongoose.Schema({
-  logId: { type: Number, unique: true },
   type: { type: String, enum: ['Jackpot', 'HotSeat'], required: true },
   jackpotId: { type: String, required: true },
   jackpotName: { type: String },
   value: { type: Number, required: true },
   machineNumber: { type: String, required: true },
-  timestamp: {
-        default: () => moment().tz("Asia/Bangkok").toLocaleString('en-US', {
-            timeZone: 'Asia/Bangkok'
-        }),
-        required:true,type:Date,
-    },
+  timestamp: { type: Date, default: Date.now },
 }, { timestamps: true });
 
-// Add index for efficient querying
+
+
+HitSchema.index({ machineNumber: 1, value: 1 }, { unique: true });
 HitSchema.index({ jackpotId: 1, type: 1, timestamp: -1 });
 
+// HitSchema.plugin(AutoIncrement, { inc_field: 'hitId' });
 
-module.exports = mongoose.model('Hits', HitSchema);
+const Hit = db.model('Hit', HitSchema, 'hits');
+module.exports = Hit;

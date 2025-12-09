@@ -1,6 +1,6 @@
 
 const mongoose = require('mongoose');
-const { AutoIncrement } = require('../mongo_config');
+const { AutoIncrement } = require('../Mongodb_Service/mongo_config');
 const moment = require('moment-timezone');
 
 const JackpotSchema = new mongoose.Schema({
@@ -21,10 +21,11 @@ const InformationBroadcastSchema = new mongoose.Schema({
 }, { timestamps: true });
 
 // Add index for efficient querying
-InformationBroadcastSchema.index({ timestamp: -1 });
+// InformationBroadcastSchema.index({ timestamp: -1 });
 
 // Apply auto-increment plugin for logId
 InformationBroadcastSchema.plugin(AutoIncrement, { inc_field: 'logId' });
 
 // Prevent model redefinition
-module.exports = mongoose.models.InformationBroadcast || mongoose.model('InformationBroadcast', InformationBroadcastSchema);
+module.exports = mongoose.model('InformationBroadcast', InformationBroadcastSchema);
+// module.exports = mongoose.models.InformationBroadcast || mongoose.model('InformationBroadcast', InformationBroadcastSchema);
