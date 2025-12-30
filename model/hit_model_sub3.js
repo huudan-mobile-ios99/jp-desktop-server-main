@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const { AutoIncrement,mongooseSub3 } = require('../Mongodb_Service/mongodb_config_sub3');
+const { mongooseSub3 } = require('../Mongodb_Service/mongodb_config_sub3');
 
 const db = mongooseSub3.useDb('JPDesktop1');
 

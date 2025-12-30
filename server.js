@@ -47,14 +47,13 @@
   const {connectDBHitSub1,mongooseSub} = require('./Mongodb_Service/mongo_config_Sub');
   const {connectDBHitSub2,mongooseSub2} = require('./Mongodb_Service/mongo_config_Sub2');
   const { connectDBSUB3, mongooseSub3 } = require("./Mongodb_Service/mongodb_config_sub3");
-
+  // const { connectDBHitSub6, mongooseSub6 } = require("./Mongodb_Service/mongodb_config_sub6");
 
 
 
 
   const { initializeCleanup } = require('./worker/cleanup');
   const { initializeCleanupHit } = require('./worker/cleanup_hit');
-
   const { initializeCleanupSub1 } = require('./worker/cleanup_sub1');
   const { initializeCleanupSub2 } = require('./worker/cleanup_sub2');
 
@@ -107,7 +106,7 @@
 
   // Initialize broadcast and hit streams
 
-  const { handleBroadcastStreamSUB } = require('./socket_handler_broadcast_Sub');
+  // const { handleBroadcastStreamSUB } = require('./socket_handler_broadcast_Sub');
   const { handleBroadcastStream } = require('./socket_handler_broadcast');
   const { handleHitStream } = require('./socket_handler_hit');
 
@@ -143,7 +142,7 @@
       await initializeDBConnections();
       try {
         handleBroadcastStream(io);
-        handleBroadcastStreamSUB(io);
+        // handleBroadcastStreamSUB(io);
         handleHitStream(io);
       } catch (error) {
         console.error(`[${formatDate()}] Failed to initialize socket handlers:`, error.message);

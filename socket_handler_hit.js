@@ -5,7 +5,9 @@ const formatDate = () => new Date().toISOString();
   const HitModel = require('./model/hit_model');       // JPDesktop_Hit
   const HitModelSub = require('./model/hit_model_sub');// JPDesktop_Hit_Sub
   const HitModel2 = require('./model/hit_model_sub2'); // JPDesktop_Hit_Sub2
-  // const HitModel3 = require('./model/hit_model_sub3'); //JPDesktop_Hit_Sub3
+  const HitModel3 = require('./model/hit_model_sub3'); //JPDesktop_Hit_Sub3
+  // const HitModel6 = require('./model/hit_model_sub6'); //JPDesktop_Hit_Sub3
+
 
 function handleHitStream(io) {
   let hitChangeStreamRetries = 0;
@@ -125,9 +127,11 @@ async function checkModel(model, name) {
 //END CHECK MODEL 
 (async () => {
   const dbModels = [
-    { name: 'HIT_MAIN', model: HitModel },
-    { name: 'HIT_SUB', model: HitModelSub },
-    { name: 'HIT_SUB2', model: HitModel2 },
+    { name: '0.HIT_MAIN', model: HitModel },
+    { name: '1.HIT_SUB', model: HitModelSub },
+    { name: '2.HIT_SUB2', model: HitModel2 },
+    { name: '3.HIT_SUB3', model: HitModel3 },
+    // { name: 'HIT_SUB6', model: HitModel6 },
   ];
 
   await Promise.all(

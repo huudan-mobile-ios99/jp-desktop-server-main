@@ -24,7 +24,6 @@
 // module.exports = HitSub1;
 
 
-
 const mongoose = require("mongoose");
 const { AutoIncrement, mongooseSub } = require("../Mongodb_Service/mongo_config_Sub");
 // Use JPDesktop_Sub database

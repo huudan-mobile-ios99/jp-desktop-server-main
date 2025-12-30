@@ -1,35 +1,39 @@
 
 
+// const InfoModel = require('./model/information_model');
+// const InfoModelAlt = require('./model/information_model_alt');
+// const InfoModelSub = require('./model/information_model_sub');
+// const InfoModelSub2 = require('./model/information_model_sub2');
+// const IfModel = require('./model/info_model');
 
-// const Model = require('./model/info_model');
 
 // const formatDate = () => new Date().toISOString();
 // const baseRetryDelay = 5000; // 5 seconds
 
 
-// function handleBroadcastStreamSUB(io) {
+// function handleBroadcastStream(io) {
 //   const throttleWindow = 20000; // 20 seconds
 //   const lastEmissionTimes = {}; // Store per-DB timestamps
 
 
-//   function watchBroadcastChangeStreamSUB(modelName) {
+//   function watchBroadcastChangeStream(modelName, InfoModel) {
 //     console.log(` Starting broadcast change stream for ${modelName}`);
-//     if (!Model) {
+//     if (!InfoModel) {
 //       console.error(`[${formatDate()}] ERROR: InfoModel for ${modelName} is undefined!`);
 //       return;
 //     }
-//     if (!Model || typeof Model.watch !== 'function') {
+//     if (!InfoModel || typeof InfoModel.watch !== 'function') {
 //     console.error(`[${formatDate()}] ERROR: InfoModel for ${modelName} is undefined or invalid! Skipping change stream.`);
 //     return; // Skip to avoid crash
 //     }
 
 //     const restart = () => {
 //       console.log(`[${formatDate()}] Restarting change stream for ${modelName} in ${baseRetryDelay}ms`);
-//       setTimeout(() => watchBroadcastChangeStreamSUB(modelName, ), baseRetryDelay);
+//       setTimeout(() => watchBroadcastChangeStream(modelName, InfoModel), baseRetryDelay);
 //     };
 
 
-//     const broadcastChangeStream = Model.watch(
+//     const broadcastChangeStream = InfoModel.watch(
 //       [{ $match: { operationType: 'insert' } }],
 //       { fullDocument: 'updateLookup' },
 //     );
@@ -38,7 +42,7 @@
 //        try {
 //         if (change.operationType === 'insert' && change.fullDocument) {
 //           const latestBroadcast = change.fullDocument;
-//           console.log(`[${formatDate()}] ${modelName} Broadcast change detected:`);
+//           console.log(`[${formatDate()}] ${modelName} Broadcast change detected`);
 //           const currentTime = Date.now();
 //           if (lastEmissionTimes[modelName] && currentTime - lastEmissionTimes[modelName] < throttleWindow) {
 //             return; // Throttled for this DB
@@ -117,7 +121,7 @@
 
 // async function ensureWatch(modelName, model) {
 //   if (await checkModel(model, modelName)) {
-//     watchBroadcastChangeStreamSUB(modelName, model);
+//     watchBroadcastChangeStream(modelName, model);
 //   } else {
 //     console.warn(`[${formatDate()}] ${modelName} not ready, retrying in 5s...`);
 //     setTimeout(() => ensureWatch(modelName, model), 5000);
@@ -126,7 +130,12 @@
 
 // (async () => {
 //   const dbModels = [
-//     { name: '6..SSUB_DB_BACKUP', model: Model },
+//     { name: '1.ALT_DB', model: InfoModelAlt },
+//      { name: '3.SUB_DB', model: InfoModelSub },
+//      { name: '2.MAIN_DB', model: InfoModel },
+//     { name: '4.SUB_DB2', model: InfoModelSub2 },
+//     { name: '5.SUB_DB3', model: IfModel },
+   
 //   ];
 
 //   dbModels.forEach(({ name, model }) => ensureWatch(name, model));
@@ -135,11 +144,12 @@
 
 
 
-// setInterval(() => {
-//     // console.log(`[${formatDate()}] Broadcast handler - Connected clients: ${io.engine.clientsCount}`);
-//     const rooms = io.sockets.adapter.rooms;
-//     // console.log(`[${formatDate()}] Broadcast handler - Active rooms:`, Array.from(rooms.keys()).filter(room => room.startsWith('jackpot:')));
-//   },5* 60000);
+// // setInterval(() => {
+// //     console.log(`[${formatDate()}] Broadcast handler - Connected clients: ${io.engine.clientsCount}`);
+// //     const rooms = io.sockets.adapter.rooms;
+// //     console.log(`[${formatDate()}] Broadcast handler - Active rooms:`, Array.from(rooms.keys()).filter(room => room.startsWith('jackpot:')));
+// //   }, 5*60000);
+
 // }
 
-// module.exports = { handleBroadcastStreamSUB };
+// module.exports = { handleBroadcastStream };

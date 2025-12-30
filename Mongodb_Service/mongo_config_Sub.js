@@ -18,30 +18,30 @@ const AutoIncrement = AutoIncrementFactory(mongooseSub);
 const connectDBHitSub1 = async () => {
   try {
     await mongooseSub.asPromise();
-    console.log("✅ Connected DBSUB2");
+    console.log("✅ Connected DBSUB1");
 
     setInterval(async () => {
       try {
         await mongooseSub.db.admin().ping();
-        console.log("MongoDB SUB2 ping successful");
+        console.log("MongoDB DBSUB1 ping successful");
       } catch (err) {
-        console.log("MongoDB SUB2 ping failed:", err.message);
+        console.log("MongoDB DBSUB1 ping failed:", err.message);
       }
     }, 30 * 60 * 1000);
 
     mongooseSub.on("disconnected", () => {
-      console.log("⚠️ MongoDB SUB2 disconnected. Retrying...");
+      console.log("⚠️ MongoDB DBSUB1 disconnected. Retrying...");
     });
 
     mongooseSub.on("reconnected", () => {
-      console.log("✅ MongoDB SUB2 reconnected");
+      console.log("✅ MongoDB DBSUB1 reconnected");
     });
 
     mongooseSub.on("error", (err) => {
-      console.log("❌ MongoDB SUB2 connection error:", err.message);
+      console.log("❌ MongoDB DBSUB1 connection error:", err.message);
     });
   } catch (err) {
-    console.log("❌ MongoDB SUB2 connection failed:", err.message);
+    console.log("❌ MongoDB DBSUB1 connection failed:", err.message);
     setTimeout(connectDBHitSub1,3* 60000);
   }
 }
